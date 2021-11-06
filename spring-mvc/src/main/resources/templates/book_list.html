@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <tr th:each="entry : ${books}">
+        <td th:text="${entry.key}">Id</td>
+        <td>
+            <table>
+                <tr th:each="book: ${entry.value}">
+                    <td th:text="${book.name}"></td>
+                    <td th:text="${book.email}"></td>
+                    <td>
+                        <a th:href="@{/app/{id}/view(id=${entry.key})}">
+                            <button type="button">view</button>
+                        </a>
+                    </td>
+                    <td>
+                        <a th:href="@{/app/{id}/edit(id=${entry.key})}">
+                            <button type="button">edit</button>
+                        </a>
+                    </td>
+                    <td>
+                        <a th:href="@{/app/{id}/delete(id=${entry.key})}">
+                            <button type="button">delete</button>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+
+    </tr>
+</table>
+
+<form action="/app/add" method="post">
+    <ul>
+        <li>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name">
+        </li>
+        <li>
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email">
+        </li>
+        <li>
+            <input type="submit" value="add">
+        </li>
+    </ul>
+</form>
+</body>
+</html>
